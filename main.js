@@ -42,21 +42,30 @@ function playRound(playerSelection, computerSelection) {
     return "Something strange has happened..."
   }
 
-  function game(){
-    while (playerScore < 5 && computerScore < 5){
-        playerSelection = prompt("Input 'Rock', 'Paper' or 'Scissors'")
+
+
+  const buttons = document.querySelectorAll(".btn")
+  const results = document.querySelector(".results")
+  buttons.forEach(element => {
+    element.addEventListener('click', (e) => {
+        const playerSelection = element.textContent
         const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection))
+        results.textContent = (playRound(playerSelection, computerSelection) + ` You: ${playerScore}, Computer: ${computerScore}`)
         console.log(`You: ${playerScore}, Computer: ${computerScore}` )
-    }
-    if (playerScore == 5){
-        console.log("You win!")
-    }
-    if (computerScore == 5){
-        console.log("You lose!")
-    }
-  }
+        if (playerScore == 5){
+            results.textContent = "You win!"
+        }
+        if (computerScore == 5){
+            results.textContent = "You lose!"
+        }
+    })
+    
+  });
+
+ 
+
+
 
   let playerScore = 0
   let computerScore = 0
-  game()
+ // game()
